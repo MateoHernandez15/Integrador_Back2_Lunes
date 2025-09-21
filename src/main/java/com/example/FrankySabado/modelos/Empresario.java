@@ -1,6 +1,7 @@
 package com.example.FrankySabado.modelos;
 
 import com.example.FrankySabado.ayudas.SectorEmpresa;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +10,7 @@ public class Empresario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -21,22 +22,26 @@ public class Empresario {
     @Column(name = "departamento", nullable = false)
     private String departamento;
 
+    @OneToOne(mappedBy = "empresario")
+    @JsonBackReference
+    private Usuario usuario;
+
     public Empresario() {
     }
 
     public Empresario(Integer id, String nombre, SectorEmpresa sector, String departamento) {
-        Id = id;
+        this.id = id;
         this.nombre = nombre;
         this.sector = sector;
         this.departamento = departamento;
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -61,5 +66,13 @@ public class Empresario {
 
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
