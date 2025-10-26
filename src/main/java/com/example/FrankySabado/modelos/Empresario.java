@@ -22,8 +22,9 @@ public class Empresario {
     @Column(name = "departamento", nullable = false)
     private String departamento;
 
-    @OneToOne(mappedBy = "empresario")
-    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    @JsonBackReference(value = "relacionusuarioempresario")
     private Usuario usuario;
 
     public Empresario() {

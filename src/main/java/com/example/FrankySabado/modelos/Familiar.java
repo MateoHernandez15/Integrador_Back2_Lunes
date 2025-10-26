@@ -1,6 +1,7 @@
 package com.example.FrankySabado.modelos;
 
 import com.example.FrankySabado.ayudas.Parentescos;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,15 +18,21 @@ public class Familiar {
     @Column(name = "direccion", nullable = false, unique = false, length = 150)
     private String direccion;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    @JsonBackReference(value = "relacionusuariofamiliar")
+    private Usuario usuario;
+
     public Familiar(){
 
     }
 
-    public Familiar(Integer id, Parentescos parentesco, String telefono, String direccion) {
+    public Familiar(Integer id, Parentescos parentesco, String telefono, String direccion, Usuario usuario) {
         this.id = id;
         this.parentesco = parentesco;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -58,5 +65,13 @@ public class Familiar {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
