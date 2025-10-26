@@ -1,7 +1,9 @@
 package com.example.FrankySabado.controladores;
 
 import com.example.FrankySabado.modelos.Usuario;
+import com.example.FrankySabado.modelos.dtos.UsuarioRegistroDTO;
 import com.example.FrankySabado.servicios.UsuarioServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,8 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio servicio;
 
-    //Por cada metodo del servicio se programa
-    //un metodo del controlador
     @PostMapping
-    public ResponseEntity<?> activarServicioGuardar(@RequestBody Usuario datosQueEnviaJossy){
+    public ResponseEntity<?> activarServicioGuardar(@Valid @RequestBody UsuarioRegistroDTO datosQueEnviaJossy){
         try{
             return ResponseEntity
                     .status(HttpStatus.OK)
